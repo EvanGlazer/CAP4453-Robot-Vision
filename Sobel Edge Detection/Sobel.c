@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 {
     int i,j,p,q,mr,sum1,sum2;
     double bigThreshold, smallThreshold;
-    FILE *fo1, *fo2, *fo3, *fp1, *fopen();
+    FILE *fo1, *fo2, *fo3, *fp1;
     char *foobar;
 
     // Scanning in the input file
@@ -90,9 +90,9 @@ int main(int argc, char** argv)
     fo3 = fopen("highThreshold.pgm", "wb");
 
     // Adding header to pgm files
-    fprintf(fo1, "P5\nPICSIZE PICSIZE\n255\n");
-    fprintf(fo2, "P5\nPICSIZE PICSIZE\n255\n");
-    fprintf(fo3, "P5\nPICSIZE PICSIZE\n255\n");
+    fprintf(fo1, "P5\n%d %d\n255\n", PICSIZE, PICSIZE);
+    fprintf(fo2, "P5\n%d %d\n255\n", PICSIZE, PICSIZE);
+    fprintf(fo3, "P5\n%d %d\n255\n", PICSIZE, PICSIZE);
 
     // Printing values to pgm files
     for (i=0;i<PICSIZE;i++)

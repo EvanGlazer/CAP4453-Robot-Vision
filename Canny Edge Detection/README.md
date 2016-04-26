@@ -16,7 +16,7 @@ How to run:
 
 Example:
 	$gcc -o canny Canny.c
-	$./canny input.pgm 3
+	$./canny input.pgm 1
 
 Output: 
 	magnitude.pgm : Contains the magnitude values of the original image.

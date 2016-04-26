@@ -14,12 +14,12 @@
      double xconv[PICSIZE][PICSIZE];
      double yconv[PICSIZE][PICSIZE];
      double magnitude[PICSIZE][PICSIZE];
-     int histogram[PICSIZE][PICSIZE];
+     int histogram[PICSIZE];
 
 int main(int argc, char **argv) {
 
-    int     i, j, p, q, mr, centx, centy, moretodobool;
-    double  xmaskval, ymaskval, xsum, ysum, sig, maxival, minival, maxval, high, low, slope;
+    int     i, j, p, q, mr, centx, centy, moretodobool, area;
+    double  xmaskval, ymaskval, xsum, ysum, sig, maxival, high, low, slope, cutOff;
     FILE    *fo1, *fo2, *fo3, *fp1, *fopen();
     char    *foobar;
     
@@ -32,11 +32,6 @@ int main(int argc, char **argv) {
     argc--; argv++;
     foobar = *argv;
     sig = atof(foobar);
-
-    // Scanning in the high value
-    argc--; argv++;
-    foobar = *argv;
-    high = atof(foobar);
 
     mr = (int)(sig * 3);
     centx = (MAXMASK / 2);
@@ -166,12 +161,22 @@ int main(int argc, char **argv) {
     // Automatically calculating the hi and low 
     //   threshold that will be used in the double
     //   threshold calculation below
-    // for (i = 0; i < PICSIZE; i++)
-    // {   for (j = 0; j < PICSIZE; j++)
-    //     {
-    //         histogram[i][j] = magnitude[i][j] ++
-    //     }
-    // }
+    for (i = 0; i < PICSIZE; i++) {
+        for (j = 0; j < PICSIZE; j++) {
+            (histogram[(int)magnitude[i][j]])++;
+        }
+    }
+
+    cutOff = .1 * PICSIZE * PICSIZE;
+    area = 0;
+    for (i = PICSIZE - 1; i >= 0; i--) {
+        area += histogram[i];
+        if (area > cutOff) {
+            break;
+        }
+    }
+
+    high = i;
     low = 0.35 * high;
 
 

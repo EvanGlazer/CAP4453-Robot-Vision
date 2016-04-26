@@ -10,11 +10,11 @@ How to run:
 -Locate C Code location 
 -Compile the code with the following
 	gcc -o canny Canny.c
-	./Canny (Input File) (Sigma Value)
+	./canny (Input File) (Sigma Value)
 
 Example:
 	$gcc -o canny Canny.c
-	$./canny input.pgm 3
+	$./canny input.pgm 1
 
 Output: 
 	magnitude.pgm : Contains the magnitude values of the original image.
